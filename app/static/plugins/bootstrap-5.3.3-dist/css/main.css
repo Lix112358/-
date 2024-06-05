@@ -1,0 +1,168 @@
+/* Style Sheet for the Login Template */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: #f0f8ff; /* Light blue background */
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+}
+
+.notification-bar {
+    width: 60%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-top: 150px;
+}
+
+.notification-bar h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.notification-bar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.notification-bar ul li a {
+    text-decoration: none;
+    color: #333;
+    line-height: 2.5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification-bar .more {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: #333;
+    margin-top: 10px;
+}
+
+.login-box {
+    width: 35%;
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex-basis: 30%;
+}
+
+.login-box h2 {
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    display: block;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0d6efd; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    margin-left: 5px;
+}
+
+.qr-section img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px auto;
+}
+
+.qr-section p {
+    text-align: center;
+    color: #666;
+}
+
+/* Add any additional styles needed */
+/* Title Section Styles */
+.title-section {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    font-family: "Russo One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.title-section h1 {
+    color: #0d6efd; /* Blue color for the title */
+    font-size: 2em; /* Larger font size for visibility */
+    margin-bottom: 0; /* Remove margin if any */
+}
+
+
+/* Role Selection Styling */
+.role-selection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.role-selection input[type="radio"] {
+    opacity: 0; /* Making radio button invisible but clickable */
+    position: absolute; /* Take it out of the flow to allow label to be clickable */
+    cursor: pointer;
+}
+
+.role-selection label {
+    padding: 10px 20px;
+    border: 2px solid #0d6efd;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 10px; /* Space between labels */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Changing label appearance when the corresponding radio button is selected */
+.role-selection input[type="radio"]:checked + label {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Ensure the clickable area covers the label */
+.role-selection label:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Rest of the styles */

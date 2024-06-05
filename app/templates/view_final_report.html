@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            left: 0;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .content::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FF9B00;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left .content::after {
+            left: -17px;
+        }
+
+        .date {
+            font-size: 12px;
+            font-style: italic;
+            color: #999;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .container::before {
+                left: 60px;
+            }
+
+            .left .content::after, .right .content::after {
+                left: -17px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css' %}"
+          rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">用户</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider ">
+
+        <!-- Nav Item - 首页管理 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'index2' %}">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>首页管理</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - 通知公告 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'announcements2' %}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>通知公告</span>
+            </a>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - 项目申请 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'apply_projects2' %}">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>项目申请</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - 成果填报 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url 'submit_results' %}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>成果填报</span>
+            </a>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - 进度追踪 -->
+        <li class="nav-item active">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>进度追踪</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{% url 'tips' %}">进度提示</a>
+                    <a class="collapse-item" href="{% url 'my_projects' %}">我的项目</a>
+                    <a class="collapse-item" href="{% url 'funding_application' %}">经费申请</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Text -->
+                <div class="mr-auto ml-md-3 my-2 my-md-0 mw-100">
+                    <span class="text-uppercase page-subtitle">课程思政项目管理系统</span>
+                </div>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                           placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                {% if user.is_authenticated %}
+                                    <span class="navbar-text me-3">{{ user.username }}</span>
+                                {% endif %}
+                            </span>
+                            <img class="img-profile rounded-circle"
+                                 src="{% static 'startbootstrap-sb-admin-2-gh-pages/img/undraw_profile.svg' %}">
+                        </a>
+                    </li>
+
+                    <!-- Nav Item - Logout -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            {% block content %}
+
+                <div class="container mt-4">
+                    <h2>结项报告详情 - {{ final_report.project_name }}</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">项目名称: {{ final_report.project_name }}</h5>
+                            <p class="card-text">
+                                <strong>审核状态:</strong> {{ final_report.get_final_report_Status_display }}</p>
+                            <p class="card-text"><strong>项目成果汇总:</strong> {{ final_report.results_summary }}</p>
+                            <p class="card-text">
+                                <strong>项目主要研究内容:</strong> {{ final_report.main_research_content }}</p>
+                            <p class="card-text">
+                                <strong>思政教育意义:</strong> {{ final_report.ideological_education_significance }}</p>
+                            <p class="card-text">
+                                <strong>结项报告审核意见:</strong> {{ final_report.final_report_comments }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endblock %}
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                <a class="btn btn-primary" href="{% url 'login2' %}">退出</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js' %}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js' %}"></script>
+
+</body>
+
+</html>

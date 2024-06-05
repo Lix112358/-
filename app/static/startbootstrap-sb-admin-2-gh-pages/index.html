@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            left: 0;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .content::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FF9B00;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left .content::after {
+            left: -17px;
+        }
+
+        .date {
+            font-size: 12px;
+            font-style: italic;
+            color: #999;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .container::before {
+                left: 60px;
+            }
+
+            .left .content::after, .right .content::after {
+                left: -17px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+
+
+        .course-header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #ffffff; /* Lighter or matching the page background */
+            color: #333; /* Ensuring good contrast */
+            font-size: 24px; /* Smaller size if it's too large */
+            border-bottom: 4px solid #FFA500; /* Keeping an accent color */
+        }
+
+        .course-card {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Less pronounced shadow */
+            border: 1px solid #ddd; /* Lighter border */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* More noticeable interaction */
+        }
+
+        .card-content {
+            padding: 15px;
+            font-size: 16px;
+            color: #444; /* Dark grey for better readability */
+        }
+
+        .button-style {
+            background-color: #FFA500; /* Eye-catching button color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px; /* Rounded corners for the button */
+            text-transform: uppercase; /* More professional, impactful look */
+        }
+
+        .button-style:hover {
+            background-color: #cc8400; /* Darker on hover for interactive feel */
+        }
+
+
+        .innewMore {
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically, if needed */
+            height: 50px; /* Adjust the height as necessary */
+            font-size: 18px; /* Optional: Adjust font size */
+        }
+
+        /* Additional styling for the link */
+        .innewMore a {
+            text-decoration: none;
+            color: #007BFF; /* Example blue color for the link */
+            font-weight: bold;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .course-card {
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .course-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .course-info h2, .course-info p {
+            margin: 5px 0;
+        }
+    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">用户</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider ">
+
+        <!-- Nav Item - 首页管理 -->
+        <li class="nav-item active">
+            <a class="nav-link " href="index.html">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>首页管理</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - 通知公告 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>通知公告</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Components:</h6>
+                    <a class="collapse-item" href="buttons.html">Buttons</a>
+                    <a class="collapse-item" href="cards.html">Cards</a>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - 项目申请 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>项目申请</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Custom Utilities:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Colors</a>
+                    <a class="collapse-item" href="utilities-border.html">Borders</a>
+                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+
+        <!-- Nav Item - 进度追踪 -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>进度追踪</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="login.html">进度提示</a>
+                    <a class="collapse-item" href="register.html">提交中期报告</a>
+                </div>
+            </div>
+        </li>
+
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Charts</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Tables</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="sidebar-card d-none d-lg-flex">
+            <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+            <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and
+                more!</p>
+            <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Text -->
+                <div class="mr-auto ml-md-3 my-2 my-md-0 mw-100">
+                    <span class="text-uppercase page-subtitle">课程思政项目管理系统</span>
+                </div>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                             aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                           placeholder="Search for..." aria-label="Search"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <!-- Other dropdown items for user information -->
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Logout -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <div class="timeline">
+                    <div class="container left">
+                        <div class="content">
+                            <h2>申请项目</h2>
+                            <p>填写并提交项目申请表格。</p>
+                            <span class="date">2024-05-01</span>
+                        </div>
+                    </div>
+                    <div class="container right">
+                        <div class="content">
+                            <h2>审批通过</h2>
+                            <p>项目申请经过审查并获得批准。</p>
+                            <span class="date">2024-05-15</span>
+                        </div>
+                    </div>
+                    <div class="container left">
+                        <div class="content">
+                            <h2>提交补充材料</h2>
+                            <p>根据审批意见提交所需的补充材料。</p>
+                            <span class="date">2024-05-20</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Page Heading -->
+                <div class="course-header">
+                    <h1>国家示范课程思政示范课程</h1>
+                </div>
+
+
+                <div class="grid-container">
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/560" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1626406080397.png" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>电路原理</h4>
+                            <p>清华大学</p>
+                        </div>
+                    </div>
+                    <!-- Repeat the above block for each course -->
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/60" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1614132797198.png" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>设计与制造Ⅱ</h4>
+                            <p>上海交通大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/948" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1641782538264.png" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>结构现代设计方法</h4>
+                            <p>天津大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/688" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1636624379427.png" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>航空航天概论</h4>
+                            <p>北京航空航天大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/244" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1657593285095.jpg" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>水工钢筋混凝土结构</h4>
+                            <p>大连理工大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/661" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1656409095141.png" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>基础会计学</h4>
+                            <p>暨南大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/352" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1622447039614.jpg" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>电视节目导播</h4>
+                            <p>中国传媒大学</p>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <a href="https://xhsz.news.cn/curriculum/detail/255" target="_blank">
+                            <div class="course-image">
+                                <img src="http://wj008.xhsz.tisapi.com/upfiles/1616754175257.jpg" alt="Course Image">
+                            </div>
+                        </a>
+                        <div class="course-info">
+                            <h4>政治经济学</h4>
+                            <p>西南财经大学</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="innewMore"><a href="https://xhsz.news.cn/curriculum">- 查看更多 -</a></div>
+
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Earnings (Monthly)
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Earnings (Annual)
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="progress progress-sm mr-2">
+                                                    <div class="progress-bar bg-info" role="progressbar"
+                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Requests Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Pending Requests
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+
+                <div class="row">
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Direct
+                                        </span>
+                                    <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Social
+                                        </span>
+                                    <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Referral
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Project Card Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="small font-weight-bold">Server Migration <span
+                                        class="float-right">20%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Sales Tracking <span
+                                        class="float-right">40%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Customer Database <span
+                                        class="float-right">60%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar" role="progressbar" style="width: 60%"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Payout Details <span
+                                        class="float-right">80%</span></h4>
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h4 class="small font-weight-bold">Account Setup <span
+                                        class="float-right">Complete!</span></h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Color System -->
+                        <div class="row">
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-primary text-white shadow">
+                                    <div class="card-body">
+                                        Primary
+                                        <div class="text-white-50 small">#4e73df</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-success text-white shadow">
+                                    <div class="card-body">
+                                        Success
+                                        <div class="text-white-50 small">#1cc88a</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-info text-white shadow">
+                                    <div class="card-body">
+                                        Info
+                                        <div class="text-white-50 small">#36b9cc</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-warning text-white shadow">
+                                    <div class="card-body">
+                                        Warning
+                                        <div class="text-white-50 small">#f6c23e</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-danger text-white shadow">
+                                    <div class="card-body">
+                                        Danger
+                                        <div class="text-white-50 small">#e74a3b</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-secondary text-white shadow">
+                                    <div class="card-body">
+                                        Secondary
+                                        <div class="text-white-50 small">#858796</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-light text-black shadow">
+                                    <div class="card-body">
+                                        Light
+                                        <div class="text-black-50 small">#f8f9fc</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mb-4">
+                                <div class="card bg-dark text-white shadow">
+                                    <div class="card-body">
+                                        Dark
+                                        <div class="text-white-50 small">#5a5c69</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Illustrations -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                         src="img/undraw_posting_photo.svg" alt="...">
+                                </div>
+                                <p>Add some quality, svg illustrations to your project courtesy of <a
+                                        target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
+                                    constantly updated collection of beautiful svg images that you can use
+                                    completely free and without attribution!</p>
+                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
+                                    unDraw &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Approach -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                            </div>
+                            <div class="card-body">
+                                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
+                                    CSS bloat and poor page performance. Custom CSS classes are used to create
+                                    custom components and custom utility classes.</p>
+                                <p class="mb-0">Before working with this theme, you should become familiar with the
+                                    Bootstrap framework, especially the utility classes.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script>
+    document.querySelectorAll('.content').forEach(item => {
+    item.addEventListener('click', function() {
+        alert('详细信息: ' + this.querySelector('p').textContent);
+    });
+});
+
+</script>
+</body>
+
+</html>
